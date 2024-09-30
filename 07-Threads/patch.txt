@@ -1,0 +1,31 @@
+diff --git a/07-Threads/threads.c b/07-Threads/threads.c
+index 5bda3b6..c910e92 100644
+--- a/07-Threads/threads.c
++++ b/07-Threads/threads.c
+@@ -73,7 +73,7 @@ void thread_start()
+ 	             "bx lr\n");
+ }
+ 
+-int thread_create(void (*run)(void *), void *userdata)
++int thread_create(void (*run)(void *), void *userdata)// @NOTE 
+ {
+ 	/* Find a free thing */
+ 	int threadId = 0;
+@@ -95,7 +95,7 @@ int thread_create(void (*run)(void *), void *userdata)
+ 
+ 	stack += STACK_SIZE - 32; /* End of stack, minus what we are about to push */
+ 	if (first) {
+-		stack[8] = (unsigned int) run;
++		stack[8] = (unsigned int) run;// @NOTE 
+ 		stack[9] = (unsigned int) userdata;
+ 		first = 0;
+ 	} else {
+@@ -107,7 +107,7 @@ int thread_create(void (*run)(void *), void *userdata)
+ 	}
+ 
+ 	/* Construct the control block */
+-	tasks[threadId].stack = stack;
++	tasks[threadId].stack = stack;// @NOTE 
+ 	tasks[threadId].in_use = 1;
+ 
+ 	return threadId;
